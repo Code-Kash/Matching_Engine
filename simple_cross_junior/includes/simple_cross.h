@@ -1,8 +1,11 @@
+#pragma once
+
 #include <string>
 #include <list>
 #include <unordered_map>
 #include <map>
 #include <ctime>
+#include <vector>
 
 struct alignas(8) Order {
     char type;
@@ -21,19 +24,19 @@ class SimpleCross {
     private:
         results_t results;
         Order order;
-        order_book_t buyBook;
-        order_book_t sellBook;
+        std::unordered_map<std::string, order_book_t> buyBooks;
+        std::unordered_map<std::string, order_book_t> sellBooks;
         std::unordered_map<uint32_t, Order> orderMap;
+        std::map<double, std::vector<uint32_t>> orderMap_sortedbyPrice;
 
         void addOrder(const Order& order) noexcept;
-        void removeOrder(const Order& order) noexcept;
+        void removeOrder(uint32_t oid) noexcept;
 
     public:
         Order parseLine(const std::string& line);
         void validateOrder(const Order& order); //Handle input errors
         results_t processOrder(Order& order);
         results_t processCancel(Order& order);
-        results_t processPrint(const Order& order);
-        results_t processError(const Order& order);
+        results_t processPrint();
         results_t action(const std::string& line);
 };
