@@ -37,12 +37,11 @@ void SimpleCross::removeOrder(uint32_t oid) noexcept {
         }
     }
 
-    // Remove from maps
+    // Remove from order maps
     orderMap.erase(oid);
 
     for (auto& entry : orderMap_sortedbyPrice) {
         auto& orderIds = entry.second;
         orderIds.erase(std::remove(orderIds.begin(), orderIds.end(), oid), orderIds.end());
     }
-    std::cout << orderMap_sortedbyPrice.size() << '\n';
 }

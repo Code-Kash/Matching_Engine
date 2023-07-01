@@ -31,12 +31,11 @@ class SimpleCross {
 
         void addOrder(const Order& order) noexcept;
         void removeOrder(uint32_t oid) noexcept;
-
     public:
-        Order parseLine(const std::string& line);
+        [[nodiscard]] Order parseLine(const std::string& line);
         void validateOrder(const Order& order); //Handle input errors
-        results_t processOrder(Order& order);
-        results_t processCancel(Order& order);
-        results_t processPrint();
-        results_t action(const std::string& line);
+        [[nodiscard]] results_t processOrder(Order& order);
+        [[nodiscard]] results_t processCancel(Order& order);
+        [[nodiscard]] results_t processPrint();
+        [[nodiscard]] results_t action(const std::string& line);
 };

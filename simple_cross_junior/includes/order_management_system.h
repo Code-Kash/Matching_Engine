@@ -8,8 +8,8 @@ private:
 
 public:
     void validateOrder(const Order& order);
-    results_t processOrder(Order& order);
-    results_t processCancel(Order& order);
-    results_t processPrint();
-    results_t action(const std::string& line);
+    [[nodiscard]] results_t processOrder(Order& order);
+    [[nodiscard]] results_t processCancel(Order& order);
+    [[nodiscard]] results_t processPrint();
+    [[nodiscard]] results_t action(const std::string& line);
 };

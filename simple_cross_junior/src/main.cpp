@@ -134,31 +134,57 @@ F 10008 IBM 3 102.00000
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <filesystem>
 #include "simple_cross.h"
 
 int main(int argc, char **argv)
 {
-    Order order;
-    SimpleCross scross;
-    std::string line;
-    std::ifstream actions("actions.txt", std::ios::in);
-    std::cout << "Reading actions.txt\n";
-    if (!actions.is_open()) {
-      std::cerr << "Failed to open the file 'actions.txt'.\n";
-      return 1;
-    }
-    //benchmark with std::chrono
-    auto start = std::chrono::high_resolution_clock::now();
-    while (std::getline(actions, line))
+
+    // Path to the testcases folder
+    std::string testcasesPath = "../../simple_cross_junior/testcases";
+
+    // Iterate over all files in the testcases folder
+    for (const auto& entry : std::filesystem::directory_iterator(testcasesPath))
     {
-        std::cout << "Read Line: " << line << '\n';
-        results_t results = scross.action(line);
-        for (results_t::const_iterator it=results.begin(); it!=results.end(); ++it)
+        if (!entry.is_regular_file())
         {
-            std::cout << *it << std::endl;
+            // Skip directories or other non-regular files
+            continue;
         }
+
+        // Get the current file path
+        std::string filepath = entry.path().string();
+
+        // Open the current file
+        std::ifstream actions(filepath, std::ios::in);
+        std::cout << "Reading file: " << filepath << '\n';
+
+        // Check if the file was opened successfully
+        if (!actions.is_open()) {
+            std::cerr << "Failed to open the file '" << filepath << "'.\n";
+            continue;
+        }
+
+        // Create a SimpleCross object
+        SimpleCross scross;
+
+        // Benchmark with std::chrono, commented out for submission
+        //auto start = std::chrono::high_resolution_clock::now();
+        std::string line;
+
+        // Read the file line by line
+        while (std::getline(actions, line))
+        {
+            //std::cout << "Read Line: " << line << '\n';
+            results_t results = scross.action(line);
+            for (const auto& result : results)
+            {
+                std::cout << result << std::endl;
+            }
+        }
+        //auto finish = std::chrono::high_resolution_clock::now();
+        //std::cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << " microseconds\n";
     }
-    auto finish = std::chrono::high_resolution_clock::now();
-    std::cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << " microseconds\n";
+
     return 0;
 }
