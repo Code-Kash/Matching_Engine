@@ -62,7 +62,7 @@ The codebase for the Simple Cross Order Management System is structured as follo
 
 The Simple Cross Order Management System has the following dependencies:
 
-- C++ compiler that supports C++11 or later.
+- C++ compiler that supports C++17 or later.
 - CMake build system (version 3.0 or later).
 
 ## Building the Project
