@@ -52,7 +52,7 @@ The codebase for the Simple Cross Order Management System is structured as follo
 
 - `simple_cross.h` and `simple_cross.cpp`: Define and implement the SimpleCross class, which represents the core logic for order management and matching. It maintains the order books, processes order actions, and generates results.
 
-- `order.h` and `order.cpp`: Define and implement the Order struct, which represents an individual order with its properties.
+- `order_management_system.h` and `order_management_system.cpp`: Define and implement the Order Management System, which performs order validation, processing, error handling, canceling, printing, filling, and cross checking functionality.
 
 - `book_builder.h` and `book_builder.cpp`: Define and implement the BookBuilder class, which handles adding and removing orders from the order books.
 
