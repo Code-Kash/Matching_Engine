@@ -143,6 +143,9 @@ int main(int argc, char **argv)
     // Path to the testcases folder
     std::string testcasesPath = "../../simple_cross_junior/testcases";
 
+    // Benchmark with std::chrono, commented out for submission
+    auto start = std::chrono::high_resolution_clock::now();
+
     // Iterate over all files in the testcases folder
     for (const auto& entry : std::filesystem::directory_iterator(testcasesPath))
     {
@@ -168,8 +171,6 @@ int main(int argc, char **argv)
         // Create a SimpleCross object
         SimpleCross scross;
 
-        // Benchmark with std::chrono, commented out for submission
-        //auto start = std::chrono::high_resolution_clock::now();
         std::string line;
 
         // Read the file line by line
@@ -182,9 +183,10 @@ int main(int argc, char **argv)
                 std::cout << result << std::endl;
             }
         }
-        //auto finish = std::chrono::high_resolution_clock::now();
-        //std::cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << " microseconds\n";
     }
+    
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << " microseconds\n";
 
     return 0;
 }
