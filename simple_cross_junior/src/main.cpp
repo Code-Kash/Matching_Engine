@@ -127,10 +127,6 @@ F 10008 IBM 3 102.00000
 
 */
 
-// Stub implementation and example driver for SimpleCross.
-// Your crossing logic should be accesible from the SimpleCross class.
-// Other than the signature of SimpleCross::action() you are free to modify as needed.
-
 #include <iostream>
 #include <fstream>
 #include <chrono>
